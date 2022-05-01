@@ -36,12 +36,17 @@
                 include('vues/perso_affichage.php');
 
                 // --- INCLUDES RACES ---
+                include('include/race_select.php');
                 include('vues/race_affichage.php');
 
                 // --- INCLUDES LIEUX ---
                 include('include/lieu_select.php');
                 include('include/lieu_delete.php');
                 include('vues/lieu_affichage.php');
+
+                // --- INCLUDES CATEGORIES ---
+                include('include/categorie_select.php');
+                include('vues/categorie_affichage.php');
 
                 $pdo = connexion();
 
@@ -146,7 +151,7 @@
 
                         $races = select_liste_races($pdo); 
                         $lieux = select_lieux_races($pdo, $id_race);
-                        $categos = select_categos_races($pdo, $id_race);
+                            $categos = select_categos_races($pdo, $id_race);
                         $persos = select_persos_races($pdo, $id_race);
                         affiche_liste_races($races, $lieux, $categos);
                     
@@ -185,6 +190,25 @@
                         // Efface lieu
                         del_lieu($pdo, $lieu['id_lieu']);
                     break;
+
+                    // - - - C A T E G O R I E S - - - 
+
+                    case 'page_categorie':
+                        //Créer une vue
+                        echo "<h2>Liste des catégories</h2>";
+                        $categories = select_liste_categories($pdo);
+                        affiche_liste_categorie($categories);
+                    break;
+
+                    case 'page_detail_categorie':
+                        // Créer une vue;
+                        echo '<h2>La catégorie</h2>';
+                        $id_cat = get_integer('id_cat');
+                        $categorie = select_categorie($pdo, $id_cat);
+                        affiche_categorie($id_cat);
+                    break;
+
+                    // - - - - - - - - - - - - - - - - -
 
                     default :
                         //créer une vue
