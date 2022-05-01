@@ -29,9 +29,19 @@
                 
                 include('include/connexion.php');
                 include('include/get_post.php');
+
+                // --- INCLUDES PERSONNAGES ---
                 include('include/perso_select.php');
                 include('include/perso_delete.php');
                 include('vues/perso_affichage.php');
+
+                // --- INCLUDES RACES ---
+                include('vues/race_affichage.php');
+
+                // --- INCLUDES LIEUX ---
+                include('include/lieu_select.php');
+                include('include/lieu_delete.php');
+                include('vues/lieu_affichage.php');
 
                 $pdo = connexion();
 
@@ -66,6 +76,8 @@
                         affiche_mythe($mythe, $lieux, $persos);
                          
                     break;
+
+                    // - - - P E R S O N N A G E S - - - 
                     
                     case 'page_perso' :
                         
@@ -119,6 +131,8 @@
                         del_perso($pdo, $perso['id_perso']);
                     break;
 
+                    // - - - R A C E S - - - 
+
                     case 'page_race':
                     echo '<h2>Liste des races</h2>';
 
@@ -136,6 +150,40 @@
                         $persos = select_persos_races($pdo, $id_race);
                         affiche_liste_races($races, $lieux, $categos);
                     
+                    break;
+
+                    // - - - L I E U X - - - 
+
+                    case 'page_lieu':
+                        // Créer une vue
+                        echo "<h2>Liste des lieux</h2>";
+                        $lieux = select_liste_lieux($pdo);
+                        affiche_liste_lieux($lieux);
+                    break;
+
+                    case 'page_detail_lieu':
+                        // Créer une vue
+                        echo "<h2>Le lieu</h2>";
+                        $id_lieu = get_integer('id_lieu');
+                        $lieu = select_lieu($pdo, $id_lieu);
+                        affiche_lieu($id_lieu);
+                    break;
+
+                    case 'page_lieu/add':
+                        // Formulairep our ajouter un lieu
+                        require('vues/lieu_form_add.php');
+                        if(isset($_POST['nom_lieu'])) {
+                            $nom_lieu = $_POST['nom_lieu'];
+                            $desc_lieu = $_POST['desc_lieu'];
+                            $illu_lieu = $_POST['illu_lieu'];
+                            require "include/lieu_add.php";
+                            add_lieu($pdo, $nom_lieu, $desc_lieu, $illu_lieu);
+                        }
+                    break;
+
+                    case 'page_detail_lieu$id_lieu='.$lieu['id_lieu'].'/delete';
+                        // Efface lieu
+                        del_lieu($pdo, $lieu['id_lieu']);
                     break;
 
                     default :
