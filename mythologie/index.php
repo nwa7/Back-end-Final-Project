@@ -18,11 +18,11 @@
             <div class="conteneur">
                 <div class="menu">
                     <a href="index.php" >Accueil</a>
-                    <a href="index.php?action=page_mytho" >Choisisser par mythologie</a>
-                    <a href="index.php?action=page_lieu" >Choisisser par lieu</a>
-                    <a href="index.php?action=page_perso" >Choisisser par personnage</a>
-                    <a href="index.php?action=page_race" >Choisisser par race</a>
-                    <a href="index.php?action=page_mythe" >Choisisser par mythe</a>
+                    <a href="index.php?action=page_mytho" >Choisir par mythologie</a>
+                    <a href="index.php?action=page_lieu" >Choisir par lieu</a>
+                    <a href="index.php?action=page_perso" >Choisir par personnage</a>
+                    <a href="index.php?action=page_race" >Choisir par race</a>
+                    <a href="index.php?action=page_mythe" >Choisir par mythe</a>
                 </div>
                 
                 <?php
@@ -117,6 +117,26 @@
                         
                         // Efface perso
                         del_perso($pdo, $perso['id_perso']);
+                    break;
+
+                    case 'page_race':
+                    echo '<h2>Liste des races</h2>';
+
+                        $races = select_liste_races($pdo); 
+                        affiche_liste_races($races);
+                    break;
+                    
+                    case 'page_detail_race' :
+
+                        echo '<h2>La race</h2>';
+
+                        $races = select_liste_races($pdo); 
+                        $lieux = select_lieux_races($pdo, $id_race);
+                        $categos = select_categos_races($pdo, $id_race);
+                        $persos = select_persos_races($pdo, $id_race);
+                        affiche_liste_races($races, $lieux, $categos);
+                    
+                    break;
 
                     default :
                         //créer une vue
