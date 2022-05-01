@@ -3,7 +3,7 @@
 
 function select_liste_races($pdo) {
   // construction de la requête
-  $sql = 'SELECT id_race, nom_race, desc_race FROM mythe ORDER BY nom_race';
+  $sql = 'SELECT id_race, nom_race, desc_race FROM race ORDER BY nom_race';
 //   echo '<p>Requête à exécuter : '.$sql.'</p>';
   // exécution de la requête
   $query = $pdo->prepare($sql);
