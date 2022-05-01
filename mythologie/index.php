@@ -18,7 +18,7 @@
             <div class="conteneur">
                 <div class="menu">
                     <a href="index.php" >Accueil</a>
-                    <a href="index.php?action=page_mytho" >Choisir par mythologie</a>
+                    <a href="index.php?action=page_categorie" >Choisir par categorie</a>
                     <a href="index.php?action=page_lieu" >Choisir par lieu</a>
                     <a href="index.php?action=page_perso" >Choisir par personnage</a>
                     <a href="index.php?action=page_race" >Choisir par race</a>
@@ -148,12 +148,19 @@
                     case 'page_detail_race' :
 
                         echo '<h2>La race</h2>';
-
-                        $races = select_liste_races($pdo); 
+                        
+                        //$races = select_liste_races($pdo); 
+                        //$lieux = select_lieux_races($pdo, $id_race);
+                        //$categos = select_categos_races($pdo, $id_race);
+                        //$persos = select_persos_races($pdo, $id_race);
+                        //affiche_liste_races($races, $lieux, $categos);
+                        
+                        $id_race = get_integer('id_race');
+                        $race = select_race($pdo, $_id_race); 
                         $lieux = select_lieux_races($pdo, $id_race);
-                            $categos = select_categos_races($pdo, $id_race);
+                        $categos = select_categos_races($pdo, $id_race);
                         $persos = select_persos_races($pdo, $id_race);
-                        affiche_liste_races($races, $lieux, $categos);
+                        affiche_race($race, $persos);
                     
                     break;
 
@@ -171,7 +178,7 @@
                         echo "<h2>Le lieu</h2>";
                         $id_lieu = get_integer('id_lieu');
                         $lieu = select_lieu($pdo, $id_lieu);
-                        affiche_lieu($id_lieu);
+                        affiche_lieu($lieu);
                     break;
 
                     case 'page_lieu/add':
@@ -186,7 +193,7 @@
                         }
                     break;
 
-                    case 'page_detail_lieu$id_lieu='.$lieu['id_lieu'].'/delete';
+                    case 'page_detail_lieu&id_lieu='.$lieu['id_lieu'].'/delete';
                         // Efface lieu
                         del_lieu($pdo, $lieu['id_lieu']);
                     break;
@@ -205,7 +212,7 @@
                         echo '<h2>La catégorie</h2>';
                         $id_cat = get_integer('id_cat');
                         $categorie = select_categorie($pdo, $id_cat);
-                        affiche_categorie($id_cat);
+                        affiche_categorie($categorie);
                     break;
 
                     // - - - - - - - - - - - - - - - - -
