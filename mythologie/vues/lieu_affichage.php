@@ -3,7 +3,7 @@
 function affiche_liste_lieux($lieux){
     foreach ($lieux as $lieu){
         echo    '<h3 class="lieu">
-                    <a href="./index.php?action=page_detail_lieu&id_lieu='.$lieu['id_perso'].'"> '.$lieu['nom_perso'].'</a>
+                    <a href="./index.php?action=page_detail_lieu&id_lieu='.$lieu['id_lieu'].'"> '.$lieu['nom_lieu'].'</a>
                 </h3>'.
 
         //A limiter le nombre de caractère pour le lieu

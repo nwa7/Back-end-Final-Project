@@ -6,7 +6,7 @@ function affiche_liste_races($races){
         echo '<h3 class="race"><a href="./index.php?action=page_detail_race&id_race='.$race['id_race'].
         '"> '.$race['nom_race'].'</a></h3>';
         //A limiter le nombre de caractère pour le mythe
-        echo '<p>'.$mythe['desc_race'].'</p>';
+        echo '<p>'.$race['desc_race'].'</p>';
 
 
     }
