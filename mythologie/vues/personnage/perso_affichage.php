@@ -36,7 +36,6 @@ function affiche_perso($perso, $parent1, $parent2) {
 
 
 function select_form_persos($persos){
-    echo '<select name="id_cat" size=1 >';
     echo '<option value="NULL">Aucun</option>';
     foreach ($persos as $perso){
         echo '<option value='.$perso['id_perso'].'>'.$perso['nom_perso'].'</option>';
