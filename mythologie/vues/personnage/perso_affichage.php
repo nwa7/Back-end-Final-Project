@@ -33,3 +33,15 @@ function affiche_perso($perso, $parent1, $parent2) {
     // Bouton supprimer
     echo '<a href="./index.php?action=page_detail_perso&id_perso='.$perso['id_perso'].'/delete">Supprimer ?</a>';
 }
+
+
+function select_form_persos($persos){
+    echo '<select name="id_cat" size=1 >';
+    echo '<option value="NULL">Aucun</option>';
+    foreach ($persos as $perso){
+        echo '<option value='.$perso['id_perso'].'>'.$perso['nom_perso'].'</option>';
+    }
+    echo '</select>';
+}
+
+?>

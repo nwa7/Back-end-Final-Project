@@ -31,22 +31,33 @@
                 include('include/get_post.php');
 
                 // --- INCLUDES PERSONNAGES ---
-                include('include/perso_select.php');
-                include('include/perso_delete.php');
-                include('vues/perso_affichage.php');
+                include('include/personnage/perso_select.php');
+                include('include/personnage/perso_delete.php');
+                include('vues/personnage/perso_affichage.php');
 
                 // --- INCLUDES RACES ---
-                include('include/race_select.php');
-                include('vues/race_affichage.php');
+                include('include/race/race_select.php');
+                include('vues/race/race_affichage.php');
 
                 // --- INCLUDES LIEUX ---
-                include('include/lieu_select.php');
-                include('include/lieu_delete.php');
-                include('vues/lieu_affichage.php');
+                include('include/lieu/lieu_select.php');
+                include('include/lieu/lieu_delete.php');
+                include('vues/lieu/lieu_affichage.php');
+                //include('vues/lieu/lieu_form_add.php');
 
                 // --- INCLUDES CATEGORIES ---
-                include('include/categorie_select.php');
-                include('vues/categorie_affichage.php');
+                include('include/categorie/categorie_select.php');
+                include('vues/categorie/categorie_affichage.php');
+
+                 // --- INCLUDES MYTHES ---
+                 include('include/mythe/mythe_select.php');
+                 include('include/mythe/mythe_add.php');
+                 include('include/mythe/mythe_delete.php');
+                 include('include/mythe/mythe_update.php');
+                 include('vues/mythe/mythe_affichage.php');
+                 include('vues/mythe/mythe_form_add.php');
+                 include('vues/mythe/mythe_form_update.php');
+
 
                 $pdo = connexion();
 
@@ -56,20 +67,22 @@
                 else $action = '';
 
                 switch($action) {
+
+                // - - - M Y T H E S - - - 
+
                     case 'page_mythe' :
 
-                        //créer une vue
                         echo '<h2>Liste des mythes</h2>';
 
                         $mythes = select_liste_mythes($pdo); 
                         affiche_liste_mythes($mythes);
+                        echo '<a href="./index.php?action=page_mythe/add">Ajouter un mythe ?</a>';
 
                     break;
                     
 
                     case 'page_detail_mythe' :
 
-                        //créer une vue
                         echo '<h2>Le mythe</h2>';
 
                         $id_mythe = get_integer('id_mythe');
@@ -79,7 +92,101 @@
                         $persos = select_persos_mythe($pdo, $id_mythe);
         
                         affiche_mythe($mythe, $lieux, $persos);
+
                          
+                    break;
+
+                    case 'page_mythe/update':
+                        $id_mythe = get_integer('id_mythe');
+                        $mythe = select_mythe($pdo, $id_mythe);
+                        formulaire_update_mythe($pdo,$mythe);
+                    break;
+
+                    case 'page_mythe/modifier':
+                        
+                        $id_mythe = get_integer('id_mythe');
+                        $mythe = select_mythe($pdo, $id_mythe);
+                        echo "Le mythe a été modifié";
+                        $titre = post_string('titre');
+                        $desc_mythe = post_string('desc_mythe');
+                        $epoque = post_string('epoque');
+                        $id_cat = post_integer('id_cat');
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+                          else {
+                            $name=$mythe['illu_mythe'];
+                            //print("Aucune image reçue !");
+                          
+                          }
+                          echo '<h2>Réception d\'un nouveau mythe</h2>';
+                          echo '<p>Titre: '.$titre.'</p>';
+                          echo '<p>Description : '.$desc_mythe.'</p>';
+                          echo '<p>Epoque : '.$epoque.'</p>';
+
+                          modifier_mythe($pdo,$id_mythe, $titre, $name, $desc_mythe, $epoque, $id_cat);
+                    break;
+
+
+                    case 'page_mythe/delete':
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le mythe a été supprimé";
+                        delete_mythe($pdo, $id_mythe);
+                    break;
+
+                    case 'page_mythe/add':
+                        formulaire_insert_mythe();
+                        formulaire_insert_lieux_mythe();
+                        formulaire_insert_persos_mythe();
+                    break;
+
+                    case 'page_mythe/insert':
+
+                        $titre = post_string('titre');
+                        $desc_mythe = post_string('desc_mythe');
+                        $epoque = post_string('epoque');
+                        //var_dump($_FILES);
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+                          else {
+                            print("Aucune image reçue !");
+                            $name=NULL;
+                          }
+
+                        $id_cat = post_integer('id_cat');
+
+                        echo '<h2>Réception d\'un nouveau mythe</h2>';
+                        echo '<p>Titre: '.$titre.'</p>';
+                        echo '<p>Description : '.$desc_mythe.'</p>';
+                        echo '<p>Epoque : '.$epoque.'</p>';
+
+                        insert_mythe($pdo, $titre, $name, $desc_mythe, $epoque, $id_cat);
+
+                    break;
+
+                    case 'page_lieux_mythe/insert':
+
+                    break;
+
+                    case 'page_persos_mythe/insert':
+
                     break;
 
                     // - - - P E R S O N N A G E S - - - 
@@ -110,7 +217,7 @@
                     case 'page_perso/add' :
 
                         // Formulaire pour ajouter perso
-                        require('vues/perso_form_add.php');
+                        require('vues/personnage/perso_form_add.php');
 
                         if(isset($_POST["nom_perso"])) {
                             $nom_perso = $_POST["nom_perso"];
@@ -129,12 +236,12 @@
                     
                     break;
 
-                    case 'page_detail_perso&id_perso='.$perso['id_perso'].
+                    /*case 'page_detail_perso&id_perso='.$perso['id_perso'].
                     '/delete' :
                         
                         // Efface perso
                         del_perso($pdo, $perso['id_perso']);
-                    break;
+                    break;*/
 
                     // - - - R A C E S - - - 
 
@@ -173,6 +280,7 @@
                         affiche_liste_lieux($lieux);
                     break;
 
+
                     case 'page_detail_lieu':
                         // Créer une vue
                         echo "<h2>Le lieu</h2>";
@@ -183,20 +291,20 @@
 
                     case 'page_lieu/add':
                         // Formulairep our ajouter un lieu
-                        require('vues/lieu_form_add.php');
+                        require('vues/lieu/lieu_form_add.php');
                         if(isset($_POST['nom_lieu'])) {
                             $nom_lieu = $_POST['nom_lieu'];
                             $desc_lieu = $_POST['desc_lieu'];
                             $illu_lieu = $_POST['illu_lieu'];
-                            require "include/lieu_add.php";
+                            require "include/lieu/lieu_add.php";
                             add_lieu($pdo, $nom_lieu, $desc_lieu, $illu_lieu);
                         }
                     break;
 
-                    case 'page_detail_lieu&id_lieu='.$lieu['id_lieu'].'/delete';
+                    /*case 'page_detail_lieu&id_lieu='.$lieu['id_lieu'].'/delete';
                         // Efface lieu
                         del_lieu($pdo, $lieu['id_lieu']);
-                    break;
+                    break;*/
 
                     // - - - C A T E G O R I E S - - - 
 

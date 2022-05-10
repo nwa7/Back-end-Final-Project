@@ -36,8 +36,21 @@ function affiche_mythe($mythe, $lieux, $persos){
     }
     echo '</table>';
 
-    echo '</p class="myth"><a href="index.php?action=page_detail_catzgorie&id_cat='.$mythe['id_cat'].'">'.$mythe['nom_cat'].'</a></p>';
+    echo '</p class="myth"><a href="index.php?action=page_detail_categorie&id_cat='.$mythe['id_cat'].'">'.$mythe['nom_cat'].'</a></p>';
+
+    echo "<a href='./index.php?action=page_mythe/delete&id_mythe=".$mythe['id_mythe']."'>Supprimer ?</a></br></br>";
+    echo "<a href='./index.php?action=page_mythe/update&id_mythe=".$mythe['id_mythe']."'>Modifier ?</a>";
 
 }
+
+function select_form_mythes($mythes){
+    echo '<select name="id_mythe" size=1 >';
+    echo '<option value="NULL">Aucun</option>';
+    foreach ($mythes as $mythe){
+        echo '<option value='.$mythe['id_mythe'].'>'.$mythe['titre'].'</option>';
+    }
+    echo '</select>';
+ }
+
 
 ?> 
