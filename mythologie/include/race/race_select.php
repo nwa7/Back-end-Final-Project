@@ -48,21 +48,6 @@
       return $ligne;
   }
   
-  function select_persos_race($pdo,$id_race) {
-      $sql = 'SELECT personnage.nom_perso FROM race JOIN personnage ON personnage.id_race=race.id_race WHERE id_race=:id_race';
-      $query = $pdo->prepare($sql);
-      $query->bindValue(':id_race',$id_race,PDO::PARAM_STR);
-      $query->execute();
-      if($query->errorCode() == '00000') {
-          $tableau = $query->fetchAll(PDO::FETCH_ASSOC);
-      }
-      else {
-      echo '<p>Erreur dans la requête</p>';
-      echo '<p>'.$query->errorInfo()[2].'</p>';
-      $tableau = null;
-      }
-      return $tableau;
-  }
 
   function select_form_races($races){
     echo '<select name="id_race" size=1 >';
