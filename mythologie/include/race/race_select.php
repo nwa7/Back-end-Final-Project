@@ -54,5 +54,14 @@ function select_liste_races($pdo) {
         }
         return $tableau;
     }
+
+    function select_form_races($races){
+      echo '<select name="id_race" size=1 >';
+      echo '<option value="NULL">Aucun</option>';
+      foreach ($races as $race){
+          echo '<option value='.$race['id_race'].'>'.$race['id_race'].'</option>';
+      }
+      echo '</select>';
+   }
   
 ?>

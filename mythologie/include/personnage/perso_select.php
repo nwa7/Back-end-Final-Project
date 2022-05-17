@@ -8,7 +8,6 @@ function select_liste_persos($pdo) {
   $query = $pdo->prepare($sql);
   $query->execute();
 
-  
   /* Vérif */
   if($query->errorCode() == '00000') {
     // récupération des données dans un tableau

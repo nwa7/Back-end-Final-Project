@@ -329,6 +329,7 @@
                         del_lieu($pdo, $lieu['id_lieu']);
                     break;*/
 
+
                     // - - - C A T E G O R I E S - - - 
 
                     case 'page_categorie':
@@ -346,6 +347,22 @@
                         affiche_categorie($categorie);
                     break;
 
+                    case 'page_categorie/add':
+                        // Formulairep ou ajouter une catégorie
+                        require('vues/categorie_form_add.php');
+                        if(isset($_POST['nom_cat'])) {
+                            $nom_cat = $_POST['nom_cat'];
+                            $desc_cat = $_POST['desc_cat'];
+                            $illu_cat = $_POST['illu_cat'];
+                            require "include/categorie_add.php";
+                            add_categorie($pdo, $nom_cat, $desc_cat, $illu_cat);
+                        }
+                    break;
+
+                    case 'page_detail_cat&id_cat='.$categorie['id_cat'].'/delete';
+                        // Efface categorie
+                        del_categorie($pdo, $categorie['id_cat']);
+                    break;
                     // - - - - - - - - - - - - - - - - -
 
                     default :
