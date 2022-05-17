@@ -26,6 +26,7 @@ function affiche_mythe($mythe, $lieux, $persos){
     foreach ($lieux as $lieu){
         echo '<li><a href="./index.php?action=page_detail_lieu&id_lieu='.$lieu['id_lieu'].
         '">'.$lieu['nom_lieu'].'</a></li>';
+        echo "<a href='./index.php?action=page_lieu_mythe/delete&id_mythe=".$mythe['id_mythe']."&id_lieu=".$lieu['id_lieu']."'>Supprimer ?</a></br></br>";
     }
     echo '</ul>';
 
@@ -33,6 +34,7 @@ function affiche_mythe($mythe, $lieux, $persos){
     foreach ($persos as $personnage){
         echo '<a href="./index.php?action=page_detail_perso&id_perso='.$personnage['id_perso'].
         '">'.$personnage['nom_perso'].'</a>';
+        echo "<a href='./index.php?action=page_perso_mythe/delete&id_mythe=".$mythe['id_mythe']."&id_perso=".$personnage['id_perso']."'>Supprimer ?</a></br></br>";
     }
     echo '</table>';
 
@@ -51,6 +53,8 @@ function select_form_mythes($mythes){
     }
     echo '</select>';
  }
+
+
 
 
 ?> 
