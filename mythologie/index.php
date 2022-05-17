@@ -310,11 +310,12 @@
                         $id_lieu = get_integer('id_lieu');
                         $lieu = select_lieu($pdo, $id_lieu);
                         affiche_lieu($lieu);
+
                     break;
 
                     case 'page_lieu/add':
                         // Formulairep our ajouter un lieu
-                        require('vues/lieu/lieu_form_add.php');
+                        include('vues/lieu/lieu_form_add.php');
                         if(isset($_POST['nom_lieu'])) {
                             $nom_lieu = $_POST['nom_lieu'];
                             $desc_lieu = $_POST['desc_lieu'];
@@ -324,11 +325,11 @@
                         }
                     break;
 
-                    /*case 'page_detail_lieu&id_lieu='.$lieu['id_lieu'].'/delete';
+                    case 'page_detail_lieu/delete';
                         // Efface lieu
-                        del_lieu($pdo, $lieu['id_lieu']);
-                    break;*/
-
+                        $id_lieu = get_integer('id_lieu');
+                        del_lieu($pdo, $id_lieu);
+                    break;
 
                     // - - - C A T E G O R I E S - - - 
 
