@@ -141,11 +141,40 @@
                         echo "Le mythe a été supprimé";
                         delete_mythe($pdo, $id_mythe);
                     break;
+                   
+
+                    case 'page_lieu_mythe/delete':
+                        $id_lieu = get_integer('id_lieu');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le lieu a été supprimé dans le mythe";
+                        delete_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_perso_mythe/delete':
+                        $id_perso = get_integer('id_perso');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le lieu a été supprimé dans le mythe";
+                        delete_perso_mythe($pdo, $id_perso, $id_mythe);
+                    break;
 
                     case 'page_mythe/add':
                         formulaire_insert_mythe();
                         formulaire_insert_lieux_mythe();
                         formulaire_insert_persos_mythe();
+                    break;
+
+                    case 'page_mythe_lieu/insert':
+                        $id_lieu = post_integer('id_lieu');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau lieu dans un mythe</h2>';
+                        insert_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_mythe_perso/insert':
+                        $id_perso = post_integer('id_perso');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau perso dans un mythe</h2>';
+                        insert_perso_mythe($pdo, $id_perso, $id_mythe);
                     break;
 
                     case 'page_mythe/insert':
@@ -165,6 +194,7 @@
                             // déplacement du fichier reçu
                             move_uploaded_file($temp, 'images/upload/'.$name);
                           }
+
                           else {
                             print("Aucune image reçue !");
                             $name=NULL;
@@ -181,13 +211,7 @@
 
                     break;
 
-                    case 'page_lieux_mythe/insert':
-
-                    break;
-
-                    case 'page_persos_mythe/insert':
-
-                    break;
+    
 
                     // - - - P E R S O N N A G E S - - - 
                     
@@ -218,22 +242,39 @@
 
                         // Formulaire pour ajouter perso
                         require('vues/personnage/perso_form_add.php');
+                
+                    break;
 
-                        if(isset($_POST["nom_perso"])) {
-                            $nom_perso = $_POST["nom_perso"];
-                            $sexe = $_POST["sexe"];
-                            $fct_perso = $_POST["fct_perso"];
-                            $desc_perso = $_POST["desc_perso"];
-                            $illu_perso = $_POST["illu_perso"];
-                            $id_parent1 = $_POST["id_parent1"];
-                            $id_parent2 = $_POST["id_parent2"];
-                            $id_race = $_POST["id_race"];
-                    
-                            require "include/perso_add.php";
-                            
-                            add_perso($pdo,$nom_perso,$sexe,$fct_perso,$desc_perso,$illu_perso,$id_parent1,$id_parent2,$id_race);
-                        }
-                    
+                    case 'page_perso/insert' :
+                        
+                        $nom_perso = post_string("nom_perso");
+                        $sexe = post_string("sexe");
+                        $fct_perso = post_string("fct_perso");
+                        $desc_perso = post_string("desc_perso");
+                        $id_parent1 = post_integer("id_parent1");
+                        $id_parent2 = post_integer("id_parent2");
+                        $id_race = post_integer("id_race");
+
+                        var_dump($_FILES);
+                        if (isset($_FILES['illu']['name']) && !empty($_FILES['illu']['name'])) {
+                            $temp = $_FILES['illu']['tmp_name'];
+                            $name = $_FILES['illu']['name'];
+                            $size = $_FILES['illu']['size'];
+                            $type = $_FILES['illu']['type'];
+                           
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+
+                          else {
+                            print("Aucune image reçue !");
+                            $name=NULL;
+                          }
+
+                        require "include/personnage/perso_add.php";
+                        add_perso($pdo,$nom_perso,$sexe,$fct_perso,$desc_perso,$name,$id_parent1,$id_parent2,$id_race);
+
                     break;
 
                     /*case 'page_detail_perso&id_perso='.$perso['id_perso'].
@@ -353,10 +394,11 @@
                         }
                     break;
 
-                    case 'page_detail_cat&id_cat='.$categorie['id_cat'].'/delete';
+                    /*case 'page_detail_cat&id_cat='.$categorie['id_cat'].'/delete';
                         // Efface categorie
                         del_categorie($pdo, $categorie['id_cat']);
-                    break;
+                    break;*/
+
                     // - - - - - - - - - - - - - - - - -
 
                     default :

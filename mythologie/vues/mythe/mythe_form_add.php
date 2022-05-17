@@ -24,7 +24,7 @@ function formulaire_insert_mythe(){
     }
 
     function formulaire_insert_lieux_mythe(){
-        echo '<form method="post" action="index.php?action=page_lieux_mythe/insert">
+        echo '<form method="post" action="index.php?action=page_mythe_lieu/insert">
             <fieldset>
                 <legend>Ajouter un lieu à un mythe</legend>';
                 $pdo=connexion();
@@ -41,7 +41,7 @@ function formulaire_insert_mythe(){
     }
 
     function formulaire_insert_persos_mythe(){
-        echo '<form method="post" action="index.php?action=page_persos_mythe/insert">
+        echo '<form method="post" action="index.php?action=page_mythe_perso/insert">
             <fieldset>
                 <legend>Ajouter un perso à un mythe</legend>';
                 $pdo=connexion();
