@@ -40,7 +40,7 @@ function select_liste_races($pdo) {
     }
   
     function select_persos_race($pdo,$id_race) {
-        $sql = 'SELECT personnage.nom_perso FROM race JOIN perso ON personnage.id_race=race.id_race WHERE id_race=:id_race';
+        $sql = 'SELECT personnage.nom_perso, personnage.id_perso FROM race JOIN personnage ON personnage.id_race=race.id_race WHERE personnage.id_race=:id_race';
         $query = $pdo->prepare($sql);
         $query->bindValue(':id_race',$id_race,PDO::PARAM_STR);
         $query->execute();

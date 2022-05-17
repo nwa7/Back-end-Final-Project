@@ -256,19 +256,36 @@
 
                         echo '<h2>La race</h2>';
                         
-                        //$races = select_liste_races($pdo); 
-                        //$lieux = select_lieux_races($pdo, $id_race);
-                        //$categos = select_categos_races($pdo, $id_race);
-                        //$persos = select_persos_races($pdo, $id_race);
-                        //affiche_liste_races($races, $lieux, $categos);
-                        
                         $id_race = get_integer('id_race');
-                        $race = select_race($pdo, $_id_race); 
-                        $lieux = select_lieux_races($pdo, $id_race);
-                        $categos = select_categos_races($pdo, $id_race);
-                        $persos = select_persos_races($pdo, $id_race);
+                        $race = select_race($pdo, $id_race); 
+                        $persos = select_persos_race($pdo, $id_race);
                         affiche_race($race, $persos);
                     
+                    break;
+
+                    
+                    case 'page_race/add':
+                        require('vues/race/race_form_add.php');
+                        if(isset($_POST['nom_race'])) {
+                            $nom_race = $_POST['nom_race'];
+                            $desc_race = $_POST['desc_race'];
+                            require "include/race/race_add.php";
+                            if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                                $temp = $_FILES['image']['tmp_name'];
+                                $name = $_FILES['image']['name'];
+                                $size = $_FILES['image']['size'];
+                                $type = $_FILES['image']['type'];
+                               
+                               
+                                // déplacement du fichier reçu
+                                move_uploaded_file($temp, 'images/upload/'.$name);
+                              }
+                              else {
+                                print("Aucune image reçue !");
+                                $name=NULL;
+                              } 
+                            add_race($pdo, $nom_race, $desc_race, $illu_race);
+                        }
                     break;
 
                     // - - - L I E U X - - - 
