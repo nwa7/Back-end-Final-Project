@@ -141,11 +141,40 @@
                         echo "Le mythe a été supprimé";
                         delete_mythe($pdo, $id_mythe);
                     break;
+                   
+
+                    case 'page_lieu_mythe/delete':
+                        $id_lieu = get_integer('id_lieu');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le lieu a été supprimé dans le mythe";
+                        delete_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_perso_mythe/delete':
+                        $id_perso = get_integer('id_perso');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le lieu a été supprimé dans le mythe";
+                        delete_perso_mythe($pdo, $id_perso, $id_mythe);
+                    break;
 
                     case 'page_mythe/add':
                         formulaire_insert_mythe();
                         formulaire_insert_lieux_mythe();
                         formulaire_insert_persos_mythe();
+                    break;
+
+                    case 'page_mythe_lieu/insert':
+                        $id_lieu = post_integer('id_lieu');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau lieu dans un mythe</h2>';
+                        insert_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_mythe_perso/insert':
+                        $id_perso = post_integer('id_perso');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau perso dans un mythe</h2>';
+                        insert_perso_mythe($pdo, $id_perso, $id_mythe);
                     break;
 
                     case 'page_mythe/insert':
@@ -182,13 +211,7 @@
 
                     break;
 
-                    case 'page_lieux_mythe/insert':
-
-                    break;
-
-                    case 'page_persos_mythe/insert':
-
-                    break;
+    
 
                     // - - - P E R S O N N A G E S - - - 
                     
