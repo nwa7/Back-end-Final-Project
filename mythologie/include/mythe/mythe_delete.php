@@ -22,6 +22,7 @@ function delete_mythe($pdo, $id_mythe) {
         else
         echo '<p>Clé inexistante : aucune ligne supprimée</p>';
     }
+    
     else {
         echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';
     }
