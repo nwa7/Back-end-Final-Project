@@ -1,7 +1,7 @@
 <?php
 
     function add_race($pdo, $nom_race, $desc_race, $illu_race) {
-        $sql ="INSERT INTO `race` (id_race, nom_race, desc_race, illu_race) VALUES (DEFAULT, \"$nom_race\", \"$desc_race\", \"$illu_race\")";
+        $sql ="INSERT INTO `race` (nom_race, desc_race, illu_race) VALUES (\"$nom_race\", \"$desc_race\", \"$illu_race\")";
         $query = $pdo->prepare($sql);
         
         
