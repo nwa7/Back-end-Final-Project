@@ -5,18 +5,20 @@
         $query = $pdo->prepare($sql);
 
         // Efface perso
+        $query->bindValue(':valeur', $id_perso, PDO::PARAM_STR);
         $query->execute();
 
         /* Vérif */
         if($query->errorCode() == '00000') {
-            $ligne = $query->fetch(PDO::FETCH_ASSOC);
-        }
-        else {
-            echo '<p>Erreur dans la requête</p>';
-            echo '<p>'.$query->errorInfo()[2].'</p>';
-            $tableau = null;
+            // recherche le nombre de lignes supprimées
+            $nb_lignes = $query->rowCount();
+            if ($nb_lignes > 0) 
+                echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+            else
+                echo '<p>Clé inexistante : aucune ligne supprimée</p>';
         }
 
-        // récupération de la première ligne (unique)  
-        return $ligne;
+        else {
+            echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';
+        }
     }

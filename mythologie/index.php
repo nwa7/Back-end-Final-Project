@@ -255,13 +255,11 @@
                         $id_parent2 = post_integer("id_parent2");
                         $id_race = post_integer("id_race");
 
-                        var_dump($_FILES);
                         if (isset($_FILES['illu']['name']) && !empty($_FILES['illu']['name'])) {
                             $temp = $_FILES['illu']['tmp_name'];
                             $name = $_FILES['illu']['name'];
                             $size = $_FILES['illu']['size'];
                             $type = $_FILES['illu']['type'];
-                           
                            
                             // déplacement du fichier reçu
                             move_uploaded_file($temp, 'images/upload/'.$name);
@@ -277,12 +275,11 @@
 
                     break;
 
-                    /*case 'page_detail_perso&id_perso='.$perso['id_perso'].
-                    '/delete' :
-                        
-                        // Efface perso
-                        del_perso($pdo, $perso['id_perso']);
-                    break;*/
+                    case 'page_perso/delete' :
+                        $id_perso = get_integer('id_perso');
+                        echo "Le personnage a été supprimé !";
+                        del_perso($pdo, $id_perso);
+                    break;
 
                     // - - - R A C E S - - - 
 
