@@ -47,3 +47,19 @@ function select_perso($pdo,$id_perso) {
     // récupération de la première ligne (unique)  
     return $ligne;
 }
+
+function select_mythe_perso($pdo,$id_perso) {
+  $sql = 'select mythe.id_mythe, titre from mythe join perso_mythe on mythe.id_mythe=perso_mythe.id_mythe where id_perso=:id_perso';
+  $query = $pdo->prepare($sql);
+  $query->bindValue(':id_perso',$id_perso,PDO::PARAM_STR);
+  $query->execute();
+  if($query->errorCode() == '00000') {
+      $tableau = $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+  else {
+  echo '<p>Erreur dans la requête</p>';
+  echo '<p>'.$query->errorInfo()[2].'</p>';
+  $tableau = null;
+  }
+  return $tableau;
+}

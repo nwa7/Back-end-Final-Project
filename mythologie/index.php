@@ -33,7 +33,10 @@
                 // --- INCLUDES PERSONNAGES ---
                 include('include/personnage/perso_select.php');
                 include('include/personnage/perso_delete.php');
+                include('include/personnage/perso_add.php');
+                include('include/personnage/perso_update.php');
                 include('vues/personnage/perso_affichage.php');
+                include('vues/personnage/perso_form_update.php');
 
                 // --- INCLUDES RACES ---
                 include('include/race/race_select.php');
@@ -92,7 +95,6 @@
                         $persos = select_persos_mythe($pdo, $id_mythe);
         
                         affiche_mythe($mythe, $lieux, $persos);
-
                          
                     break;
 
@@ -234,7 +236,9 @@
                         $perso = select_perso($pdo, $id_perso);
                         $parent1 = select_perso($pdo, $perso['id_parent1']);
                         $parent2 = select_perso($pdo, $perso['id_parent2']);
-                        affiche_perso($perso, $parent1, $parent2);
+                        $mythes = select_mythe_perso($pdo,$id_perso);
+
+                        affiche_perso($perso, $parent1, $parent2, $mythes);
                     
                     break;
 
@@ -255,6 +259,10 @@
                         $id_parent2 = post_integer("id_parent2");
                         $id_race = post_integer("id_race");
 
+<<<<<<< HEAD
+=======
+                        //var_dump($_FILES);
+>>>>>>> juliette
                         if (isset($_FILES['illu']['name']) && !empty($_FILES['illu']['name'])) {
                             $temp = $_FILES['illu']['tmp_name'];
                             $name = $_FILES['illu']['name'];
@@ -280,6 +288,44 @@
                         echo "Le personnage a été supprimé !";
                         delete_perso($pdo, $id_perso);
                     break;
+<<<<<<< HEAD
+=======
+
+                    case 'page_perso/update':
+                        $id_perso = get_integer('id_perso');
+                        $perso = select_perso($pdo, $id_perso);
+                        formulaire_update_perso($pdo, $perso);
+                    break;
+
+                    case 'page_perso/modifier':
+                        
+                        $id_perso = get_integer('id_perso');
+                        $perso = select_perso($pdo, $id_perso);
+                        echo "Le personnage a bien été modifié";
+                        $nom_perso = post_string("nom_perso");
+                        $sexe = post_string("sexe");
+                        $fct_perso = post_string("fct_perso");
+                        $desc_perso = post_string("desc_perso");
+                        $id_parent1 = post_integer("id_parent1");
+                        $id_parent2 = post_integer("id_parent2");
+                        $id_race = post_integer("id_race");
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+                          else {
+                            $name=$perso['illu_perso'];
+                            //print("Aucune image reçue !");
+                          }
+                          update_perso($pdo,$id_perso, $nom_perso, $sexe, $fct_perso, $name, $desc_perso, $id_parent1, $id_parent2, $id_race);
+                    break;
+>>>>>>> juliette
 
                     // - - - R A C E S - - - 
 

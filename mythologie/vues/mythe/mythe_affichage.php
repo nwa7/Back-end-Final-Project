@@ -54,6 +54,13 @@ function select_form_mythes($mythes){
     echo '</select>';
  }
 
+ function select_checkbox_mythes($mythes){
+    foreach ($mythes as $mythe){
+        echo '<input type="checkbox" name="mythe" value='.$mythe['id_mythe'].'>'.$mythe['titre'].'</br>';
+    }
+    //echo '<input type="submit" name="valid_mythe" value="Valider">';
+ }
+
 
 
 
