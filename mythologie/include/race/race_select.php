@@ -63,5 +63,15 @@
     }
     echo '</select>';
   }
+
+  function select_form_update_races($races, $rac){
+    echo '<select name="id_race" size=1 >';
+    echo '<option value='.$rac['id_race'].'>'.$rac['nom_race'].'</option>
+          <option value="NULL">Aucun</option>';
+    foreach ($races as $race){
+        echo '<option value='.$race['id_race'].'>'.$race['nom_race'].'</option>';
+    }
+    echo '</select>';
+  }
   
 ?>
