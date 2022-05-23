@@ -275,10 +275,10 @@
 
                     break;
 
-                    case 'page_perso/delete' :
+                    case 'page_perso/delete':
                         $id_perso = get_integer('id_perso');
                         echo "Le personnage a été supprimé !";
-                        del_perso($pdo, $id_perso);
+                        delete_perso($pdo, $id_perso);
                     break;
 
                     // - - - R A C E S - - - 

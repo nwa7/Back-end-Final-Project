@@ -26,7 +26,7 @@ function select_liste_persos($pdo) {
 }
 
 function select_perso($pdo,$id_perso) {
-    $sql = 'SELECT id_perso, nom_perso, fct_perso, sexe, desc_perso, illu_perso, id_parent1, id_parent2, personnage.id_race FROM personnage JOIN race ON personnage.id_race=race.id_race WHERE id_perso=:id_perso;';
+    $sql = 'SELECT id_perso, nom_perso, fct_perso, sexe, desc_perso, illu_perso, id_parent1, id_parent2, personnage.id_race, race.nom_race FROM personnage JOIN race ON personnage.id_race=race.id_race WHERE id_perso=:id_perso;';
     $query = $pdo->prepare($sql);
 
     // liaison des valeurs de paramètres
