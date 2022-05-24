@@ -143,11 +143,40 @@
                         echo "Le mythe a été supprimé";
                         delete_mythe($pdo, $id_mythe);
                     break;
+                   
+
+                    case 'page_lieu_mythe/delete':
+                        $id_lieu = get_integer('id_lieu');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le lieu a été supprimé dans le mythe";
+                        delete_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_perso_mythe/delete':
+                        $id_perso = get_integer('id_perso');
+                        $id_mythe = get_integer('id_mythe');
+                        echo "Le personnage a été supprimé du mythe";
+                        delete_perso_mythe($pdo, $id_perso, $id_mythe);
+                    break;
 
                     case 'page_mythe/add':
                         formulaire_insert_mythe();
                         formulaire_insert_lieux_mythe();
                         formulaire_insert_persos_mythe();
+                    break;
+
+                    case 'page_mythe_lieu/insert':
+                        $id_lieu = post_integer('id_lieu');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau lieu dans un mythe</h2>';
+                        insert_lieu_mythe($pdo, $id_lieu, $id_mythe);
+                    break;
+
+                    case 'page_mythe_perso/insert':
+                        $id_perso = post_integer('id_perso');
+                        $id_mythe = post_integer('id_mythe');
+                        echo '<h2>Réception d\'un nouveau perso dans un mythe</h2>';
+                        insert_perso_mythe($pdo, $id_perso, $id_mythe);
                     break;
 
                     case 'page_mythe/insert':
@@ -184,13 +213,7 @@
 
                     break;
 
-                    case 'page_lieux_mythe/insert':
-
-                    break;
-
-                    case 'page_persos_mythe/insert':
-
-                    break;
+    
 
                     // - - - P E R S O N N A G E S - - - 
                     
@@ -235,14 +258,13 @@
                         $id_parent1 = post_integer("id_parent1");
                         $id_parent2 = post_integer("id_parent2");
                         $id_race = post_integer("id_race");
-
+                        
                         //var_dump($_FILES);
                         if (isset($_FILES['illu']['name']) && !empty($_FILES['illu']['name'])) {
                             $temp = $_FILES['illu']['tmp_name'];
                             $name = $_FILES['illu']['name'];
                             $size = $_FILES['illu']['size'];
                             $type = $_FILES['illu']['type'];
-                           
                            
                             // déplacement du fichier reçu
                             move_uploaded_file($temp, 'images/upload/'.$name);
@@ -253,7 +275,6 @@
                             $name=NULL;
                           }
 
-                        require "include/personnage/perso_add.php";
                         add_perso($pdo,$nom_perso,$sexe,$fct_perso,$desc_perso,$name,$id_parent1,$id_parent2,$id_race);
 
                     break;
@@ -312,19 +333,36 @@
 
                         echo '<h2>La race</h2>';
                         
-                        //$races = select_liste_races($pdo); 
-                        //$lieux = select_lieux_races($pdo, $id_race);
-                        //$categos = select_categos_races($pdo, $id_race);
-                        //$persos = select_persos_races($pdo, $id_race);
-                        //affiche_liste_races($races, $lieux, $categos);
-                        
                         $id_race = get_integer('id_race');
-                        $race = select_race($pdo, $_id_race); 
-                        $lieux = select_lieux_races($pdo, $id_race);
-                        $categos = select_categos_races($pdo, $id_race);
-                        $persos = select_persos_races($pdo, $id_race);
+                        $race = select_race($pdo, $id_race); 
+                        $persos = select_persos_race($pdo, $id_race);
                         affiche_race($race, $persos);
                     
+                    break;
+
+                    
+                    case 'page_race/add':
+                        require('vues/race/race_form_add.php');
+                        if(isset($_POST['nom_race'])) {
+                            $nom_race = $_POST['nom_race'];
+                            $desc_race = $_POST['desc_race'];
+                            require "include/race/race_add.php";
+                            if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                                $temp = $_FILES['image']['tmp_name'];
+                                $name = $_FILES['image']['name'];
+                                $size = $_FILES['image']['size'];
+                                $type = $_FILES['image']['type'];
+                               
+                               
+                                // déplacement du fichier reçu
+                                move_uploaded_file($temp, 'images/upload/'.$name);
+                              }
+                              else {
+                                print("Aucune image reçue !");
+                                $name=NULL;
+                              } 
+                            add_race($pdo, $nom_race, $desc_race, $illu_race);
+                        }
                     break;
 
                     // - - - L I E U X - - - 

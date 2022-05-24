@@ -46,8 +46,9 @@
             echo '</br>
             <label> Mythe(s) : </label>
             </br>';
-            $mythes = select_liste_mythes($pdo);
-            select_checkbox_mythes($mythes);
+            /* $mythes = select_liste_mythes($pdo);
+            select_checkbox_mythes($mythes); */
+            formulaire_insert_persos_mythe();
                 
             echo '</fieldset>
                 <input type="submit">
