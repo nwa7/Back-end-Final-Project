@@ -31,12 +31,15 @@ function affiche_perso($perso, $parent1, $parent2, $mythes) {
     }
     echo '<p class="race">'.$perso['nom_race'].'</p>';
 
-    echo '<p>Mythe(s) associé(s) à ce personnage :</p>';
+    echo '<p>Mythe(s) associé(s) à ce personnage :</p>
+    <ul>';
+    
     foreach ($mythes as $mythe){
-        echo '<a href="./index.php?action=page_detail_mythe&id_mythe='.$mythe['id_mythe'].
-        '">'.$mythe['titre'].'</a>';
+        echo '<li><a href="./index.php?action=page_detail_mythe&id_mythe='.$mythe['id_mythe'].
+        '">'.$mythe['titre'].'</a></li>';
     }
-    echo '</table>';
+    echo '</ul>
+    </table>';
     
     // Bouton supprimer
     echo '<a href="./index.php?action=page_perso/delete&id_perso='.$perso['id_perso'].'">Supprimer ?</a>';
