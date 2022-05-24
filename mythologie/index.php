@@ -155,7 +155,7 @@
                     case 'page_perso_mythe/delete':
                         $id_perso = get_integer('id_perso');
                         $id_mythe = get_integer('id_mythe');
-                        echo "Le lieu a été supprimé dans le mythe";
+                        echo "Le personnage a été supprimé du mythe";
                         delete_perso_mythe($pdo, $id_perso, $id_mythe);
                     break;
 
@@ -258,11 +258,8 @@
                         $id_parent1 = post_integer("id_parent1");
                         $id_parent2 = post_integer("id_parent2");
                         $id_race = post_integer("id_race");
-
-<<<<<<< HEAD
-=======
+                        
                         //var_dump($_FILES);
->>>>>>> juliette
                         if (isset($_FILES['illu']['name']) && !empty($_FILES['illu']['name'])) {
                             $temp = $_FILES['illu']['tmp_name'];
                             $name = $_FILES['illu']['name'];
@@ -278,7 +275,6 @@
                             $name=NULL;
                           }
 
-                        require "include/personnage/perso_add.php";
                         add_perso($pdo,$nom_perso,$sexe,$fct_perso,$desc_perso,$name,$id_parent1,$id_parent2,$id_race);
 
                     break;
@@ -288,8 +284,6 @@
                         echo "Le personnage a été supprimé !";
                         delete_perso($pdo, $id_perso);
                     break;
-<<<<<<< HEAD
-=======
 
                     case 'page_perso/update':
                         $id_perso = get_integer('id_perso');
@@ -325,7 +319,6 @@
                           }
                           update_perso($pdo,$id_perso, $nom_perso, $sexe, $fct_perso, $name, $desc_perso, $id_parent1, $id_parent2, $id_race);
                     break;
->>>>>>> juliette
 
                     // - - - R A C E S - - - 
 

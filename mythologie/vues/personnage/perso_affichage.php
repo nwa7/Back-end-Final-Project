@@ -30,11 +30,6 @@ function affiche_perso($perso, $parent1, $parent2, $mythes) {
         '">'.$parent2['nom_perso'].'</a></p>';
     }
     echo '<p class="race">'.$perso['nom_race'].'</p>';
-<<<<<<< HEAD
-    
-    // Bouton supprimer
-    echo '<a href="./index.php?action=page_perso/delete&id_perso='.$perso['id_perso'].'">Supprimer ?</a>';
-=======
 
     echo '<p>Mythe(s) associé(s) à ce personnage :</p>';
     foreach ($mythes as $mythe){
@@ -49,7 +44,6 @@ function affiche_perso($perso, $parent1, $parent2, $mythes) {
     // Bouton modifier
     echo '</br>
     <a href="./index.php?action=page_perso/update&id_perso='.$perso['id_perso'].'">Modifier ?</a>';
->>>>>>> juliette
 }
 
 

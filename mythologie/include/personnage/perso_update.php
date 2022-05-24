@@ -20,7 +20,6 @@ function update_perso($pdo,$id_perso, $nom_perso, $sexe, $fct_perso, $illu_perso
     $query->bindValue(':id_race', $id_race, PDO::PARAM_INT);
     
     // exécution de la requête
-    $query->execute();
-    
+    $query->execute(); 
 }
 ?>

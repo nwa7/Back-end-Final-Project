@@ -52,9 +52,7 @@ function formulaire_insert_mythe(){
                 $mythes =select_liste_mythes($pdo);
                 select_form_mythes($mythes);
 
-                echo '
-                            
-                <input type="submit">
+                echo '<input type="submit">
             </fieldset>
         </form>';
 
