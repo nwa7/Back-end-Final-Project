@@ -46,10 +46,11 @@ function formulaire_insert_mythe(){
                 <legend>Ajouter un perso à un mythe</legend>';
                 $pdo=connexion();
 
-                $persos =select_liste_persos($pdo);
+                $persos = select_liste_persos($pdo);
+                echo '<select name="id_perso" size=1 >';
                 select_form_persos($persos);
 
-                $mythes =select_liste_mythes($pdo);
+                $mythes = select_liste_mythes($pdo);
                 select_form_mythes($mythes);
 
                 echo '<input type="submit">

@@ -20,7 +20,7 @@ function affiche_mythe($mythe, $lieux, $persos){
     echo 'En savoir plus sur :';
 
    
-    echo '<p>Lieu(x) où se déroule le mythe</p>';
+    echo '<p>Lieu(x) où se déroule le mythe :</p>';
     echo '<ul>';
     foreach ($lieux as $lieu){
         echo '<li><a href="./index.php?action=page_detail_lieu&id_lieu='.$lieu['id_lieu'].
@@ -30,11 +30,13 @@ function affiche_mythe($mythe, $lieux, $persos){
     echo '</ul>';
 
     echo '<p>Personnages(s) dans le mythe</p>';
+    echo '<ul>';
     foreach ($persos as $personnage){
-        echo '<a href="./index.php?action=page_detail_perso&id_perso='.$personnage['id_perso'].
-        '">'.$personnage['nom_perso'].'</a>';
+        echo '<li><a href="./index.php?action=page_detail_perso&id_perso='.$personnage['id_perso'].
+        '">'.$personnage['nom_perso'].'</a></li>';
         echo "<a href='./index.php?action=page_perso_mythe/delete&id_mythe=".$mythe['id_mythe']."&id_perso=".$personnage['id_perso']."'>Supprimer ?</a></br></br>";
     }
+    echo '</ul>';
     echo '</table>';
 
     echo '</p class="myth"><a href="index.php?action=page_detail_categorie&id_cat='.$mythe['id_cat'].'">'.$mythe['nom_cat'].'</a></p>';
@@ -52,16 +54,4 @@ function select_form_mythes($mythes){
     }
     echo '</select>';
  }
-
- /*
- function select_checkbox_mythes($mythes){
-    foreach ($mythes as $mythe){
-        echo '<input type="checkbox" name="mythe" value='.$mythe['id_mythe'].'>'.$mythe['titre'].'</br>';
-    }
- }
- */
-
-
-
-
 ?> 
