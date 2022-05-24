@@ -12,6 +12,8 @@
       // récupération des données dans un tableau
       $tableau = $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    return $tableau;
+  }
   
     function select_persos_race($pdo,$id_race) {
         $sql = 'SELECT personnage.nom_perso, personnage.id_perso FROM race JOIN personnage ON personnage.id_race=race.id_race WHERE personnage.id_race=:id_race';
@@ -28,9 +30,6 @@
         }
         return $tableau;
     }
-    // retourne les résultats
-    return $tableau;
-  }
 
   function select_race($pdo,$id_race) {
       $sql = 'SELECT id_race, nom_race, desc_race, illu_race FROM race WHERE id_race=:id_race';

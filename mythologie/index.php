@@ -361,7 +361,7 @@
                                 print("Aucune image reçue !");
                                 $name=NULL;
                               } 
-                            add_race($pdo, $nom_race, $desc_race, $illu_race);
+                            add_race($pdo, $nom_race, $desc_race, $name);
                         }
                     break;
 
