@@ -6,8 +6,8 @@ function affiche_liste_races($races){
         echo '<h3 class="race"><a href="./index.php?action=page_detail_race&id_race='.$race['id_race'].
         '"> '.$race['nom_race'].'</a></h3>';
         echo '<p>'.$race['desc_race'].'</p>';
-        echo '<a href="./index.php?action=page_race/add">Ajouter une race ?</a>';
     }
+    echo '<a href="./index.php?action=page_race/add">Ajouter une race ?</a>';
 }
 
 function affiche_race($race, $persos){
@@ -25,17 +25,19 @@ function affiche_race($race, $persos){
         '">'.$perso['nom_perso'].'</a>';
     echo '</ul>';
     }
-    echo '</table>';
+
+    if (empty($persos)){
+        echo 'Il n y a aucun personnage de cette race renseigné';
+        // Bouton supprimer
+        echo '<p><a href="./index.php?action=page_race/delete&id_race='.$race['id_race'].'">Voulez vous la supprimer ?</a></p>';
     }
 
-     
-
-
-
-        // if ($perso == null){
-        // Proposition d'effacer
-   // }
-
-
+    // update
+    echo '</br>
+    <a href="./index.php?action=page_race/update&id_race='.$race['id_race'].'">Modifier ?</a>';
+    
+    echo '</table>';
+    
+}
 
 ?> 

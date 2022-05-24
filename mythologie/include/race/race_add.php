@@ -13,6 +13,7 @@
 
         if($query->errorCode() == '00000') {
             $ligne = $query->fetch(PDO::FETCH_ASSOC);
+            echo '<p> La nouvelle race a bien été ajoutée ! </p>';
         }
 
         else {

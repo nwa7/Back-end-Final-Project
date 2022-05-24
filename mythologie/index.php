@@ -40,7 +40,10 @@
 
                 // --- INCLUDES RACES ---
                 include('include/race/race_select.php');
+                include('include/race/race_delete.php');
+                include('include/race/race_update.php');
                 include('vues/race/race_affichage.php');
+                include('vues/race/race_form_update.php');
 
                 // --- INCLUDES LIEUX ---
                 include('include/lieu/lieu_select.php');
@@ -364,6 +367,46 @@
                             add_race($pdo, $nom_race, $desc_race, $name);
                         }
                     break;
+
+                    case 'page_race/delete':
+                        $id_race = get_integer('id_race');
+                        delete_race($pdo, $id_race);
+                        echo "La race a été supprimée !";
+                    break;
+                        
+                    case 'page_race/update':
+                        $id_race = get_integer('id_race');
+                        $race = select_race($pdo, $id_race);
+                        form_update_race($pdo,$race);
+                    break;
+
+                    case 'page_race/updatebis':
+                        
+                        $id_race = get_integer('id_race');
+                        $race = select_race($pdo, $id_race);
+                        echo "La race a été modifiée";
+                        $nom_race = post_string('nom_race');
+                        $desc_race = post_string('desc_race');
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                        }
+                        else {
+                            $name=$race['illu_race'];
+                            //print("Aucune image reçue !");
+                          
+                        }
+                        
+                        update_race($pdo,$id_race, $nom_race, $desc_race, $name );
+                    break;
+
 
                     // - - - L I E U X - - - 
 
