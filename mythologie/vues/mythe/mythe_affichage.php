@@ -9,7 +9,6 @@ function affiche_liste_mythes($mythes){
         echo '<p>'.$mythe['desc_mythe'].'</p>';
 
     }
-
 }
 
 function affiche_mythe($mythe, $lieux, $persos){
@@ -53,6 +52,14 @@ function select_form_mythes($mythes){
     }
     echo '</select>';
  }
+
+ /*
+ function select_checkbox_mythes($mythes){
+    foreach ($mythes as $mythe){
+        echo '<input type="checkbox" name="mythe" value='.$mythe['id_mythe'].'>'.$mythe['titre'].'</br>';
+    }
+ }
+ */
 
 
 

@@ -2,6 +2,7 @@
     <h2>Nouveau personnage</h2>
     <form action="index.php?action=page_perso/insert" method="POST" enctype="multipart/form-data">
         <fieldset>
+            <legend>Entrez les caractéristiques du personnage : </legend></br>
             <label> Nom : </label><input type="text" name="nom_perso" placeholder="Entrez son nom" required>
             <br/>
             <label>Sexe : </label>
@@ -20,26 +21,39 @@
                 <input type="file" name="illu"/>
             <br/>
 
-            <?php
+            <fieldset>
+                <?php
 
-                $pdo=connexion();
-                $persos = select_liste_persos($pdo);
-                
-                echo '<label> Parent 1 : </label> 
-                <select name="id_parent1" size=1>';
-                select_form_persos($persos);
+                    $pdo=connexion();
+                    $persos = select_liste_persos($pdo);
+                    
+                    echo '<label> Parent 1 : </label> 
+                    <select name="id_parent1" size=1>';
+                    select_form_persos($persos);
 
-                echo '<label> Parent 2 : </label>
-                <select name="id_parent2" size=1>';
-                select_form_persos($persos);
+                    echo '</br>
+                    <label> Parent 2 : </label>
+                    <select name="id_parent2" size=1>';
+                    select_form_persos($persos);
 
-                echo '<label> Race : </label>';
-                $races = select_liste_races($pdo);
-                select_form_races($races);
+                    echo '</br>
+                    <label> Race : </label>';
+                    $races = select_liste_races($pdo);
+                    select_form_races($races);
 
-            ?>
+                    echo '</br>
+                    <label> Mythe(s) : </label>
+                    </br>';
+                    /* $mythes = select_liste_mythes($pdo);
+                    select_checkbox_mythes($mythes); */
+                    formulaire_insert_persos_mythe();
+                ?>
+            </fieldset>
+            <fieldset>
+            </fieldset>
 
             <input type="submit">
         </fieldset>
     </form>
 </html>
+

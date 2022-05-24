@@ -1,7 +1,7 @@
 <?php
 
-    function del_perso($pdo, $id_perso) {
-        $sql ="DELETE * FROM personnage WHERE id_perso=$id_perso";
+    function delete_perso($pdo, $id_perso) {
+        $sql ="DELETE FROM personnage WHERE id_perso=:valeur";
         $query = $pdo->prepare($sql);
 
         // Efface perso
