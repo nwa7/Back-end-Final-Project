@@ -438,10 +438,11 @@
                         }
                     break;
 
-                    /*case 'page_detail_lieu&id_lieu='.$lieu['id_lieu'].'/delete';
+                    case 'page_detail_lieu/delete';
                         // Efface lieu
-                        del_lieu($pdo, $lieu['id_lieu']);
-                    break;*/
+                        $id_lieu = get_integer('id_lieu');
+                        del_lieu($pdo, $id_lieu);
+                    break;
 
 
                     // - - - C A T E G O R I E S - - - 
