@@ -54,7 +54,10 @@
 
                 // --- INCLUDES CATEGORIES ---
                 include('include/categorie/categorie_select.php');
+                include('include/categorie/categorie_delete.php');
+                include('include/categorie/categorie_update.php');
                 include('vues/categorie/categorie_affichage.php');
+                include('vues/categorie/categorie_form_update.php');
 
                  // --- INCLUDES MYTHES ---
                  include('include/mythe/mythe_select.php');
@@ -495,20 +498,66 @@
 
                     case 'page_categorie/add':
                         // Formulairep ou ajouter une catégorie
-                        require('vues/categorie_form_add.php');
+                        require('vues/categorie/categorie_form_add.php');
                         if(isset($_POST['nom_cat'])) {
                             $nom_cat = $_POST['nom_cat'];
                             $desc_cat = $_POST['desc_cat'];
-                            $illu_cat = $_POST['illu_cat'];
-                            require "include/categorie_add.php";
-                            add_categorie($pdo, $nom_cat, $desc_cat, $illu_cat);
+                            if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                                $temp = $_FILES['image']['tmp_name'];
+                                $name = $_FILES['image']['name'];
+                                $size = $_FILES['image']['size'];
+                                $type = $_FILES['image']['type'];
+                               
+                               
+                                // déplacement du fichier reçu
+                                move_uploaded_file($temp, 'images/upload/'.$name);
+                            }
+                            else {
+                                $name = NULL;
+                                //print("Aucune image reçue !");
+                              
+                            }
+                            require "include/categorie/categorie_add.php";
+                            add_categorie($pdo, $nom_cat, $desc_cat, $name);
                         }
                     break;
 
-                    /*case 'page_detail_cat&id_cat='.$categorie['id_cat'].'/delete';
-                        // Efface categorie
-                        del_categorie($pdo, $categorie['id_cat']);
-                    break;*/
+                    case 'page_detail_categorie/delete';
+                        // Efface la categorie
+                        $id_cat = get_integer('id_cat');
+                        del_categorie($pdo, $id_cat);
+                    break;
+
+                    case 'page_detail_categorie/update':
+                        $id_cat = get_integer('id_cat');
+                        $cat = select_categorie($pdo, $id_cat);
+                        formulaire_update_categorie($pdo, $cat);
+                    break;
+
+                    case 'page_categorie/modifier':
+                        
+                        $id_cat = get_integer('id_cat');
+                        $cat = select_categorie($pdo, $id_cat);
+                        echo "La catégorie a bien été modifié";
+                        $nom_cat = post_string("nom_cat");
+                        $desc_cat = post_string("desc_cat");
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+                          else {
+                            $name=$cat['illu_cat'];
+                            //print("Aucune image reçue !");
+                          }
+                          update_categorie($pdo,$id_cat, $nom_cat, $name, $desc_cat);
+                    break;
+
 
                     // - - - - - - - - - - - - - - - - -
 
