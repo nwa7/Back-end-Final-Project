@@ -2,7 +2,9 @@
 <form target="_self" method="POST">
     <label>Nom : </label><input type="text" name="nom_lieu" placeholder="Entrez son nom" required><br>
     <label>Description : </label><textarea name="desc_lieu" rows="5" cols="30">Entrez sa description</textarea><br>
-    <label>Illustration : </label><!-- <input type="file" accept="image/png, image/jpeg, image/gif, image/webp" name="illu_lieu"> ???? --><br>
+    <legend>Sélectionnez une image</legend>
+        <input type="hidden" name="MAX_FILES_SIZE" value="204800"/>
+        <input type="file" name="image"/>
     <input type="submit" value="OK"></p>
 </form>
 
