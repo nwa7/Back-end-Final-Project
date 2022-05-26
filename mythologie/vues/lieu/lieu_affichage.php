@@ -25,7 +25,8 @@ function affiche_lieu($lieu) {
 
             // Bouton supprimer
 
-            "<a href='./index.php?action=page_detail_lieu/delete&id_lieu=".$lieu['id_lieu']."'>Supprimer ?</a>";
+            "<a href='./index.php?action=page_detail_lieu/delete&id_lieu=".$lieu['id_lieu']."'>Supprimer ?</a><br>
+            <a href='./index.php?action=page_lieu/update&id_lieu=".$lieu['id_lieu']."'>Modifier ?</a>";
 }
 
 function select_form_lieux($lieux){

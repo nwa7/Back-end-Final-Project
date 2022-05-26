@@ -48,8 +48,9 @@
                 // --- INCLUDES LIEUX ---
                 include('include/lieu/lieu_select.php');
                 include('include/lieu/lieu_delete.php');
+                include('include/lieu/lieu_update.php');
                 include('vues/lieu/lieu_affichage.php');
-                //include('vues/lieu/lieu_form_add.php');
+                include('vues/lieu/lieu_form_update.php');
 
                 // --- INCLUDES CATEGORIES ---
                 include('include/categorie/categorie_select.php');
@@ -442,6 +443,36 @@
                         // Efface lieu
                         $id_lieu = get_integer('id_lieu');
                         del_lieu($pdo, $id_lieu);
+                    break;
+
+                    case 'page_lieu/update':
+                        $id_lieu = get_integer('id_lieu');
+                        $lieu = select_lieu($pdo, $id_lieu);
+                        formulaire_update_lieu($pdo, $lieu);
+                    break;
+
+                    case 'page_lieu/modifier':
+                        
+                        $id_lieu = get_integer('id_lieu');
+                        $lieu = select_lieu($pdo, $id_lieu);
+                        echo "Le lieu a bien été modifié";
+                        $nom_lieu = post_string("nom_lieu");
+                        $desc_lieu = post_string("desc_lieu");
+
+                        if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+                            $temp = $_FILES['image']['tmp_name'];
+                            $name = $_FILES['image']['name'];
+                            $size = $_FILES['image']['size'];
+                            $type = $_FILES['image']['type'];
+                           
+                            // déplacement du fichier reçu
+                            move_uploaded_file($temp, 'images/upload/'.$name);
+                          }
+                          else {
+                            $name=$lieu['illu_lieu'];
+                            //print("Aucune image reçue !");
+                          }
+                          update_lieu($pdo,$id_lieu, $nom_lieu, $name, $desc_lieu);
                     break;
 
 
