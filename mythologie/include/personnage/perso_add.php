@@ -18,7 +18,7 @@
         $query->execute();
 
         if($query->errorCode() == '00000') {
-            echo '<p>Ajout réussi</p>';
+            echo '<p>L\'Ajout du personnage a réussi</p>';
         }
 
         else {

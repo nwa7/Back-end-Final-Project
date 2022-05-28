@@ -40,18 +40,18 @@
             echo '</br>
             <label> Race : </label>';
             $races = select_liste_races($pdo);
-            $rac= select_perso($pdo,$perso['id_race']);
+            $rac= select_race($pdo,$perso['id_race']);
             select_form_update_races($races, $rac);
 
-            echo '</br>
-            <label> Mythe(s) : </label>
-            </br>';
+            echo '</br>';
             /* $mythes = select_liste_mythes($pdo);
             select_checkbox_mythes($mythes); */
-            formulaire_insert_persos_mythe();
+           
                 
             echo '</fieldset>
                 <input type="submit">
             </fieldset>
         </form>';
+
+        formulaire_insert_persos_mythe();
     };

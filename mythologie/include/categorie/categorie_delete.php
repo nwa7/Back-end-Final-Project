@@ -10,6 +10,7 @@
         /* Vérif */
         if($query->errorCode() == '00000') {
             $ligne = $query->fetch(PDO::FETCH_ASSOC);
+            echo '<h2>La catégorie a été supprimée</h2>';
         }
         else {
             echo '<p>Erreur dans la requête</p>';

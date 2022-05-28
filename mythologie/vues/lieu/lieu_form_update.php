@@ -21,10 +21,12 @@
             </br>';
             /* $mythes = select_liste_mythes($pdo);
             select_checkbox_mythes($mythes); */
-            formulaire_insert_lieux_mythe();
+            
                 
             echo '</fieldset>
                 <input type="submit">
             </fieldset>
         </form>';
+
+        formulaire_insert_lieux_mythe();
     };

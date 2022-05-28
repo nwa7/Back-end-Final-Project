@@ -8,6 +8,7 @@
 
         if($query->errorCode() == '00000') {
             $ligne = $query->fetch(PDO::FETCH_ASSOC);
+            echo "<p> La catégorie a été ajoutée !</p>";
         }
 
         else {

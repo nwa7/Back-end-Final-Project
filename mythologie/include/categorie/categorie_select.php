@@ -3,7 +3,7 @@
 function select_liste_categories($pdo) {
   // construction de la requête
   $sql = 'select id_cat, nom_cat, desc_cat, illu_cat from categorie order by nom_cat;';
-//   echo '<p>Requête à exécuter : '.$sql.'</p>';
+  // echo '<p>Requête à exécuter : '.$sql.'</p>';
   // exécution de la requête
   $query = $pdo->prepare($sql);
   $query->execute();
@@ -43,6 +43,22 @@ function select_categorie($pdo, $id_cat) {
 
     // récupération de la première ligne (unique)  
     return $ligne;
+}
+
+function select_mythes_categorie($pdo,$id_cat) {
+  $sql = 'SELECT mythe.titre, mythe.id_mythe FROM mythe JOIN categorie ON mythe.id_cat=categorie.id_cat WHERE mythe.id_cat=:id_cat';
+  $query = $pdo->prepare($sql);
+  $query->bindValue(':id_cat',$id_cat,PDO::PARAM_STR);
+  $query->execute();
+  if($query->errorCode() == '00000') {
+      $tableau = $query->fetchAll(PDO::FETCH_ASSOC);
+  }
+  else {
+  echo '<p>Erreur dans la requête</p>';
+  echo '<p>'.$query->errorInfo()[2].'</p>';
+  $tableau = null;
+  }
+  return $tableau;
 }
 
 

@@ -14,7 +14,7 @@
             <br/>
             <label> Description : </label>
             <br/> 
-            <textarea name="desc_perso" rows="5" cols="30">Entrez sa description</textarea>
+            <textarea name="desc_perso" rows="5" cols="30" placeholder="Entrez sa description"></textarea>
             <br/>
             <label> Illustration : </label>
                 <input type="hidden" name="MAX_FILES_SIZE" value="204800"/>
@@ -39,21 +39,19 @@
                     echo '</br>
                     <label> Race : </label>';
                     $races = select_liste_races($pdo);
-                    select_form_races($races);
-
-                    echo '</br>
-                    <label> Mythe(s) : </label>
-                    </br>';
-                    /* $mythes = select_liste_mythes($pdo);
-                    select_checkbox_mythes($mythes); */
-                    formulaire_insert_persos_mythe();
+                    select_form_races($races);          
+                    
+                    
                 ?>
-            </fieldset>
-            <fieldset>
+            
             </fieldset>
 
             <input type="submit">
         </fieldset>
     </form>
+    <?php
+        formulaire_insert_persos_mythe();
+    ?>
+
 </html>
 

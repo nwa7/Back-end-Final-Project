@@ -18,9 +18,11 @@ function delete_mythe($pdo, $id_mythe) {
         // recherche le nombre de lignes supprimées
         $nb_lignes = $query->rowCount();
         if ($nb_lignes > 0) 
-        echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+        echo "Le mythe a été supprimé";
+        //echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+
         else
-        echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+        echo '<p>Clé inexistante : le mythe n\'a pas été supprimé</p>';
     }
     
     else {
@@ -49,9 +51,10 @@ function delete_lieu_mythe($pdo, $id_lieu, $id_mythe) {
         // recherche le nombre de lignes supprimées
         $nb_lignes = $query->rowCount();
         if ($nb_lignes > 0) 
-        echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+        //echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+        echo "Le lieu a été supprimé dans le mythe";
         else
-        echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+        echo '<p>Clé inexistante : le lieu n\'a pas pu être supprimé dans le mythe</p>';
     }
     else {
         echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';
@@ -79,9 +82,10 @@ function delete_perso_mythe($pdo, $id_perso, $id_mythe) {
         // recherche le nombre de lignes supprimées
         $nb_lignes = $query->rowCount();
         if ($nb_lignes > 0) 
-        echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+        //echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+        echo "Le personnage a été supprimé du mythe";
         else
-        echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+        echo '<p>Clé inexistante : le personnage n\'a pas pu être supprimé dans le mythe</p>';
     }
     else {
         echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';

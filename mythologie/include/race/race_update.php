@@ -3,7 +3,7 @@
 function update_race($pdo,$id_race, $nom_race, $desc_race, $illu_race)
 {
     // construction et préparation de la requête
-    $sql = 'UPDATE race SET nom_race = :nom_race ,desc_race = :desc_race, illu_race = :illu_race;';
+    $sql = 'update race set nom_race = :nom_race ,desc_race = :desc_race, illu_race = :illu_race WHERE id_race = :id_race;';
 
 
     $query = $pdo->prepare($sql);

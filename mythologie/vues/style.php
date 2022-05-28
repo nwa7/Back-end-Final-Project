@@ -116,6 +116,19 @@ h2 {
     text-align: center;
 }
 
+img[alt='photo']{
+    max-width:40rem;
+    max-height:30rem;
+}
+
+p{
+    text-align: justify;
+}
+
+.sup{
+    margin-left: 10rem;
+}
+
 /* - - - F O R M U L A I R E S - - - */
 
 input, textarea, input[type="file"]::file-selector-button, select {
@@ -130,6 +143,7 @@ input, textarea, input[type="file"]::file-selector-button, select {
 
 input[type="text"], textarea {
     width: 100%;
+    margin-bottom:1rem;
 }
 
 input[type="file"] {
@@ -146,10 +160,19 @@ input[type="submit"]:hover, input[type="file"]::-webkit-file-upload-button {
     color: #000;
 }
 
+select{
+    margin-right: 2rem;
+}
+
 /* - - - F O O T E R - - - */
 
-footer {
+footer{
+    margin-top : 5rem;
+}
+
+footer p{
     text-align: center;
+    font-size: 0.8rem;
 }
 
 </style>

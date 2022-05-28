@@ -1,7 +1,7 @@
 <h2> Nouveau lieu </h2>
-<form target="_self" method="POST">
+<form target="_self" method="POST" enctype="multipart/form-data">
     <label>Nom : </label><input type="text" name="nom_lieu" placeholder="Entrez son nom" required><br>
-    <label>Description : </label><textarea name="desc_lieu" rows="5" cols="30">Entrez sa description</textarea><br>
+    <label>Description : </label><textarea name="desc_lieu" rows="5" cols="30" placeholder="Entrez sa description"></textarea><br>
     <legend>Sélectionnez une image</legend>
         <input type="hidden" name="MAX_FILES_SIZE" value="204800"/>
         <input type="file" name="image"/>

@@ -21,9 +21,10 @@ function del_lieu($pdo, $id_lieu) {
         // recherche le nombre de lignes supprimées
         $nb_lignes = $query->rowCount();
         if ($nb_lignes > 0) 
-            echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+            echo '<h2>Le lieu a été supprimé dans '.$nb_lignes .' mythe(s)</h2>';
+            //echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
         else
-            echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+            echo '<p>Le lieu a été supprimé dans 0 mythe </p>';
     }
     else {
         echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';
@@ -46,9 +47,9 @@ function del_lieu($pdo, $id_lieu) {
         // recherche le nombre de lignes supprimées
         $nb_lignes = $query->rowCount();
         if ($nb_lignes > 0) 
-            echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+            echo '<p>Le lieu a été supprimé</p>';
         else
-            echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+            echo '<p>Clé inexistante : Le lieu ne peut être supprimé</p>';
     }
     else {
         echo '<p>Erreur : '.$query->errorInfo()[2].'</p>';

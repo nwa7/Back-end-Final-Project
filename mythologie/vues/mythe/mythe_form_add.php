@@ -13,9 +13,10 @@ function formulaire_insert_mythe(){
                 
                 $pdo=connexion();
                 $categories = select_liste_categories($pdo);
+
                 select_form_categories($categories);
 
-                echo '<input type="submit">
+                echo '<br><input type="submit">
             </fieldset>
         </form>';
 

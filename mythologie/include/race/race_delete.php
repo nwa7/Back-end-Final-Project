@@ -14,9 +14,10 @@
             $nb_lignes = $query->rowCount();
             if ($nb_lignes > 0) {
             //    echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+            echo "La race a été supprimée !";
             }
             else {
-                echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+                echo '<p>Clé inexistante : la race n\'a pas pu être supprimée</p>';
             }
         }
         else {

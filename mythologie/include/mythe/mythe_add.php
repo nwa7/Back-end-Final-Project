@@ -19,11 +19,11 @@ function insert_mythe($pdo, $titre, $illu_mythe, $desc_mythe, $epoque, $id_cat){
     // teste si tout c'est bien passé
     if($query->errorCode() == '00000') {
         // l'auteur est bien ajouté dans la base de données
-        echo '<p>Insertion réussie</p>';
+        echo '<p>Le mythe a été ajouté</p>';
     
     // facultatif : récupérer le numéro automatique généré par la base de données
         $cle = $pdo->lastInsertId();
-        echo '<p>Clé du mythe ajouté : '.$cle.'</p>';
+        //echo '<p>Clé du mythe ajouté : '.$cle.'</p>';
     }
     
     else {
@@ -49,7 +49,7 @@ function insert_lieu_mythe($pdo, $id_lieu, $id_mythe){
     // teste si tout c'est bien passé
     if($query->errorCode() == '00000') {
     // l'auteur est bien ajouté dans la base de données
-    echo '<p>Insertion réussie</p>';
+    echo '<h2>Insertion réussie d\'un nouveau lieu dans un mythe</h2>';
     
     // facultatif : récupérer le numéro automatique généré par la base de données
     $cle = $pdo->lastInsertId();
@@ -78,7 +78,7 @@ function insert_perso_mythe($pdo, $id_perso, $id_mythe){
     // teste si tout c'est bien passé
     if($query->errorCode() == '00000') {
     // l'auteur est bien ajouté dans la base de données
-    echo '<p>Insertion réussie</p>';
+    echo '<h2>Insertion réussie d\'un nouveau perso dans un mythe</h2>';
     
     // facultatif : récupérer le numéro automatique généré par la base de données
     $cle = $pdo->lastInsertId();

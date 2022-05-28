@@ -7,7 +7,7 @@
         $query->execute();
 
         if($query->errorCode() == '00000') {
-            echo "<p> ajout réussi !</p>";
+            echo "<p> Le lieu a été ajouté !</p>";
         }
 
         else {

@@ -13,9 +13,10 @@
             // recherche le nombre de lignes supprimées
             $nb_lignes = $query->rowCount();
             if ($nb_lignes > 0) 
-                echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+                //echo '<p>'.$nb_lignes . ' ligne(s) supprimée(s)</p>';
+                echo "Le personnage a été supprimé !";
             else
-                echo '<p>Clé inexistante : aucune ligne supprimée</p>';
+                echo '<p>Clé inexistante : le personnage n\'a pas été supprimé</p>';
         }
 
         else {
