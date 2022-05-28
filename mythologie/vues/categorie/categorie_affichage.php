@@ -9,6 +9,9 @@ function affiche_liste_categorie($categories){
         echo '<p>'.$categorie['desc_cat'].'</p>';
     }
 
+    // Bouton ajouter une catégorie
+
+    echo '<a href="./index.php?action=page_categorie/add">Ajouter une catégorie ?</a>';
 }
 
 function affiche_categorie($categorie) {
@@ -16,9 +19,11 @@ function affiche_categorie($categorie) {
     echo    "<h3 class='nom'>".$categorie['nom_cat']."</h3>
             <p class='desc'>".$categorie['desc_cat']."</p>
             <img src='images/upload/".$categorie['illu_cat']."'alt='photo'></br></br>".
+
             // Bouton supprimer
-            "<a href='./index.php?action=page_detail_categorie&id_categorie=".$categorie['id_cat']."/delete'>Supprimer ?</a></br>
-            <a href='./index.php?action=page_detail_categorie&id_categorie=".$categorie['id_cat']."/update'>Modifier ?</a>";
+
+            "<a href='./index.php?action=page_detail_categorie/delete&id_cat=".$categorie['id_cat']."'>Supprimer ?</a></br>
+            <a href='./index.php?action=page_detail_categorie/update&id_cat=".$categorie['id_cat']."'>Modifier ?</a>";
 }
 
 function select_form_categories($categories){

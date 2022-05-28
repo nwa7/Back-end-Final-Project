@@ -31,7 +31,7 @@ function select_categorie($pdo, $id_cat) {
     $query->execute();
 
 
-    /* Vérif */
+    /* Vérification */
     if($query->errorCode() == '00000') {
         $ligne = $query->fetch(PDO::FETCH_ASSOC);
     }
